@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blip", "Blip\Blip.csproj", "{4DF0CA6F-9901-4845-8751-D7627C5759FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blip.Web", "Blip.Web\Blip.Web.csproj", "{4DF0CA6F-9901-4845-8751-D7627C5759FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
