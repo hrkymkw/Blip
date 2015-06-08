@@ -14,7 +14,13 @@ namespace Blip.Web.Models
         public bool Active { get; set; }
         public DateTime ActiveDate { get; set; }
 
-        public virtual ICollection<MessagePacket> SentMessagePackets { get; set; }
-        public virtual ICollection<MessagePacket> ReceivedMessagePackets { get; set; }
+        public virtual ICollection<Message> SentMessages { get; set; }
+        public virtual ICollection<Message> ReceivedMessages { get; set; }
+
+        public User ()
+        {
+            SentMessages = new HashSet<Message>();
+            ReceivedMessages = new HashSet<Message>();
+        }
     }
 }

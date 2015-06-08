@@ -17,29 +17,33 @@ namespace Blip.Web.DAL
 
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<MessagePacket> MessagePackets { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().
-                HasMany(u => u.SentMessagePackets).
-                WithRequired(p => p.Sender).
-                HasForeignKey(p => p.SenderID).
-                WillCascadeOnDelete(false);
+            modelBuilder.Entity<User>()
+                .HasMany<Message>(u => u.SentMessages)
+                .WithMany(m => m.Senders)
+                .Map(um =>
+                {
+                    um.MapLeftKey("UserRefId");
+                    um.MapRightKey("MessageRefId");
+                    um.ToTable("UserMessageSent");
+                }
+                );
 
-            modelBuilder.Entity<User>().
-                HasMany(u => u.ReceivedMessagePackets).
-                WithRequired(p => p.Receiver).
-                HasForeignKey(p => p.ReceiverID).
-                WillCascadeOnDelete(false);
+            modelBuilder.Entity<User>()
+                .HasMany<Message>(u => u.ReceivedMessages)
+                .WithMany(m => m.Receivers)
+                .Map(um =>
+                    {
+                        um.MapLeftKey("UserRefId");
+                        um.MapRightKey("MessageRefId");
+                        um.ToTable("UserMessageReceived");
+                    }          
+                );
 
-            modelBuilder.Entity<Message>().
-                HasMany(m => m.MessagePackets).
-                WithRequired(p => p.Message).
-                HasForeignKey(p => p.MessageID).
-                WillCascadeOnDelete(false);
         }
     }
 }
