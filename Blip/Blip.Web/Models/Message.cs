@@ -11,8 +11,9 @@ namespace Blip.Web.Models
         public string Title { get; set; }
         public DateTime DateTime { get; set; }
         public string Body { get; set; }
+        public int SenderID { get; set; }
 
-        public User Sender { get; set; }
+        public virtual User Sender { get; set; }
         public virtual ICollection<User> Receivers { get; set; }
 
         public Message ()
