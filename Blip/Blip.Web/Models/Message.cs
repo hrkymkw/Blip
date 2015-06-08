@@ -12,12 +12,11 @@ namespace Blip.Web.Models
         public DateTime DateTime { get; set; }
         public string Body { get; set; }
 
-        public virtual ICollection<User> Senders { get; set; }
+        public User Sender { get; set; }
         public virtual ICollection<User> Receivers { get; set; }
 
         public Message ()
         {
-            Senders = new HashSet<User>();
             Receivers = new HashSet<User>();
         }
     }

@@ -22,16 +22,16 @@ namespace Blip.Web.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
-                .HasMany<Message>(u => u.SentMessages)
-                .WithMany(m => m.Senders)
-                .Map(um =>
-                {
-                    um.MapLeftKey("UserRefId");
-                    um.MapRightKey("MessageRefId");
-                    um.ToTable("UserMessageSent");
-                }
-                );
+            //modelBuilder.Entity<User>()
+            //    .HasMany<Message>(u => u.SentMessages)
+            //    .WithMany(m => m.Senders)
+            //    .Map(um =>
+            //    {
+            //        um.MapLeftKey("UserRefId");
+            //        um.MapRightKey("MessageRefId");
+            //        um.ToTable("UserMessageSent");
+            //    }
+            //    );
 
             modelBuilder.Entity<User>()
                 .HasMany<Message>(u => u.ReceivedMessages)
