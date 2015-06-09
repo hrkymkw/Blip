@@ -18,7 +18,7 @@ namespace Blip.Web.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            var viewModel = db.Users.ToList()
+            var userVM = db.Users.ToList()
                 .Where(u => u.Active == true)
                 .Select(u => new UserViewModel
                 {
@@ -26,7 +26,7 @@ namespace Blip.Web.Controllers
                     Password = u.Password,
                     Role = u.Role
                 });
-            return View(viewModel);
+            return View(userVM);
         }
 
 
