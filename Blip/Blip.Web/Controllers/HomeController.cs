@@ -19,16 +19,25 @@ namespace Blip.Web.Controllers
         public ActionResult Index()
         {
             var messageVM = db.Messages.ToList()
-                .Select(m => new MessageViewModel
+                .Select(m => new HomeIndexViewModel
                 {
                     MessageID = m.MessageID,
                     Title = m.Title,
                     DateTime = m.DateTime,
                     Body = m.Body,
-                    Sender = m.Sender,
-                    Receivers = m.Receivers
+                    Sender = m.Sender.UserName,
+                    Receivers = m.Receivers.Select(r => r.UserName).ToList()
                 });
             return View(messageVM);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

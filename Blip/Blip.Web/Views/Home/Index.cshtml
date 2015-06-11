@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blip.Web.Models.MessageViewModel> 
+﻿@model IEnumerable<Blip.Web.Models.HomeIndexViewModel> 
 
 @{
     ViewBag.Title = "Home Page";
@@ -33,12 +33,12 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sender.UserName)
+                @Html.DisplayFor(modelItem => item.Sender)
             </td>
             <td>
                 @foreach (var receiver in item.Receivers)
                 {
-                    @Html.DisplayFor(modelItem => receiver.UserName)<br/>
+                    @Html.DisplayFor(modelItem => receiver)<br/>
                 }
             </td>
             <td>

@@ -20,7 +20,7 @@ namespace Blip.Web.Controllers
         {
             var userVM = db.Users.ToList()
                 .Where(u => u.Active == true)
-                .Select(u => new UserViewModel
+                .Select(u => new AccountIndexViewModel
                 {
                     UserName = u.UserName,
                     Password = u.Password,

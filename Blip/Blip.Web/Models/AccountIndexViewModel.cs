@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Blip.Web.Models
 {
-    public class UserViewModel
+    public class AccountIndexViewModel
     {
         public string UserName { get; set; }
         public string Password { get; set; }

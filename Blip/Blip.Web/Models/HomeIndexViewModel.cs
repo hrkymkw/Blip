@@ -5,13 +5,13 @@ using System.Web;
 
 namespace Blip.Web.Models
 {
-    public class MessageViewModel
+    public class HomeIndexViewModel
     {
         public int MessageID { get; set; }
         public string Title { get; set; }
         public DateTime DateTime { get; set; }
         public string Body { get; set; }
-        public User Sender { get; set; }
-        public ICollection<User> Receivers { get; set; }
+        public string Sender { get; set; }
+        public ICollection<string> Receivers { get; set; }
     }
 }
