@@ -26,7 +26,7 @@ namespace Blip.Web.Controllers
                     DateTime = m.DateTime,
                     Body = m.Body,
                     Sender = m.Sender.UserName,
-                    Receivers = m.Receivers.Select(r => r.UserName).ToList()
+                    Receivers = m.Receivers.Select(r => r.UserName).ToList().ToArray()
                 });
             return View(messageVM);
         }
