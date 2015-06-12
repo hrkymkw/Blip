@@ -12,6 +12,6 @@ namespace Blip.Web.Models
         public DateTime DateTime { get; set; }
         public string Body { get; set; }
         public string Sender { get; set; }
-        public ICollection<string> Receivers { get; set; }
+        public string[] Receivers { get; set; }
     }
 }
