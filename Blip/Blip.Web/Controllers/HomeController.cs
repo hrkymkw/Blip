@@ -18,7 +18,9 @@ namespace Blip.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var messageVM = db.Messages.ToList()
+            var messageVM = db.Messages
+                .Include(m => m.Receivers)
+                .ToList()
                 .Select(m => new HomeIndexViewModel
                 {
                     MessageID = m.MessageID,
