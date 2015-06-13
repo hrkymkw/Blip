@@ -115,10 +115,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\BlipContext.cs" />
-    <Compile Include="DAL\BlipInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506130359048_InitialCreate.cs" />
+    <Compile Include="Migrations\201506130359048_InitialCreate.Designer.cs">
+      <DependentUpon>201506130359048_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\HomeIndexViewModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -142,6 +146,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506130359048_InitialCreate.resx">
+      <DependentUpon>201506130359048_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
