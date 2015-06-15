@@ -43,7 +43,7 @@
     }; // end opts
 
     $.fn.konami.defaults = {
-        code: [38, 40,  37, 39, 66, 65],
+        code: [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
         eventName: 'konami',
         eventProperties: null,
         cheat: function (evt, opts) {
@@ -55,6 +55,7 @@
 
 $(document).ready(function () {
     $(window).konami({
+        code: [38, 40,  37, 39, 66, 65],
         cheat: function () {
             $('#konamiCheat').show();
 
