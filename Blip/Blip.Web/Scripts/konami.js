@@ -60,10 +60,12 @@ $(document).ready(function () {
 
             $('#showBrs').click(function () {
                 $('#brs').show();
+                $(this).hide();
                 return false;
             });
             $('#showPtf').click(function () {
                 $('#ptf').show();
+                $(this).hide();
                 return false;
             });
         }
