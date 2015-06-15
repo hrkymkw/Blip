@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Blip.Web.DAL;
+﻿using Blip.Web.DAL;
 using Blip.Web.Models;
+using System.Data;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Blip.Web.Controllers
 {
@@ -28,7 +23,6 @@ namespace Blip.Web.Controllers
                 });
             return View(userVM);
         }
-
 
         protected override void Dispose(bool disposing)
         {

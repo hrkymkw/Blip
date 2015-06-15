@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Blip.Web.DAL;
+using Blip.Web.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Blip.Web.DAL;
-using Blip.Web.Models;
 
 namespace Blip.Web.Controllers
 {
@@ -18,7 +14,9 @@ namespace Blip.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var messageVM = db.Messages.ToList()
+            var messageVM = db.Messages
+                .Include(m => m.Receivers)
+                .ToList()
                 .Select(m => new HomeIndexViewModel
                 {
                     MessageID = m.MessageID,
