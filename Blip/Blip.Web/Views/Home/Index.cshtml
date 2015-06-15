@@ -3,9 +3,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<script src="@System.Web.Optimization.Scripts.Url("~/bundles/konami")"></script>
 <h2>@ViewBag.Title</h2>
-<div id="tablePanel">
 <table class="table">
     <tr>
         <th>
@@ -50,14 +48,3 @@
         </tr>
     }
 </table>
-</div>
-<div id="konamiCheat" style="display: none;">  
-    <button id="showBrs">Show me Bathroom selfie!</button>    
-    <button id="showPtf">Show me Pouty Trout Face!</button>   
-    <div id="brs" style="display: none;">
-        <img src="BathroomSelfie.jpg" alt="Bathroom Selfie Here">
-    </div>
-    <div id="ptf" style="display: none;">
-        <img src="PoutyTroutFace.jpg" alt="Pouty Trout Face Here">
-    </div>
-</div>

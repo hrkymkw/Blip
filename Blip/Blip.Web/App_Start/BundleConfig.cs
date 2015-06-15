@@ -10,7 +10,14 @@ namespace Blip.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/konami").Include(
-                        "~/Scripts/konami.js"));            
+                        "~/Scripts/konami.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/alertify").Include(
+            "~/Scripts/alertify/alertify.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/alertifycss").Include("~/Content/alertify/alertify.default.css", "~/Content/alertify/alertify.core.css", "~/Content/alertify/alertify.bootstrap.css"));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

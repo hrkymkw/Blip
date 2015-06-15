@@ -57,18 +57,21 @@ $(document).ready(function () {
     $(window).konami({
         code: [38, 40,  37, 39, 66, 65],
         cheat: function () {
-            $('#konamiCheat').show();
+            alertify.alert('Achievement Unlocked', function () {
+                $('#konamiCheat').show();
 
-            $('#showBrs').click(function () {
-                $('#brs').show();
-                $(this).hide();
-                return false;
+                $('#showBrs').click(function () {
+                    $('#brs').show();
+                    $(this).hide();
+                    return false;
+                });
+                $('#showPtf').click(function () {
+                    $('#ptf').show();
+                    $(this).hide();
+                    return false;
+                });
             });
-            $('#showPtf').click(function () {
-                $('#ptf').show();
-                $(this).hide();
-                return false;
-            });
+
         }
     });
 });
