@@ -60,6 +60,8 @@ $(document).ready(function () {
             alertify.alert('Achievement Unlocked', function () {
                 $('#konamiCheat').show();
 
+                $('.cheatArea').css("background-color", "orange");                                    
+
                 $('#showBrs').click(function () {
                     $('#brs').show();
                     $(this).hide();
