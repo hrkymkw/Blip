@@ -56,8 +56,16 @@
 $(document).ready(function () {
     $(window).konami({
         cheat: function () {
-            $('#tablePanel').hide();
-            $('#bathroomSelfie').show();
+            $('#konamiCheat').show();
+
+            $('#showBrs').click(function () {
+                $('#brs').show();
+                return false;
+            });
+            $('#showPtf').click(function () {
+                $('#ptf').show();
+                return false;
+            });
         }
     });
 });
