@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Blip.Web.Models
 {
-    public class AccountIndexViewModel
+    public class AccountEditViewModel
     {
         public int UserID { get; set; }
 
@@ -16,9 +15,5 @@ namespace Blip.Web.Models
         public bool Active { get; set; }
 
         public DateTime ActiveDate { get; set; }
-
-        public ICollection<string> SentMessages { get; set; }
-
-        public ICollection<string> ReceivedMessages { get; set; }
     }
 }

@@ -67,7 +67,7 @@ namespace Blip.Web.Controllers
         public ActionResult Index()
         {
             var userVM = db.Users.ToList()
-                //.Where(u => u.Active == true)
+                .Where(u => u.Active == true)
                 .Select(u => new AccountIndexViewModel
                 {
                     UserID = u.UserID,
@@ -115,39 +115,28 @@ namespace Blip.Web.Controllers
         [HttpPost]
         [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AccountCreateViewModel userVM)
+        public ActionResult Create([Bind(Include = "UserName,Password,Role")] User user)
         {
             if (ModelState.IsValid)
             {
-                User user = new Models.User()
-                {
-                    UserName = userVM.UserName,
-                    Password = userVM.Password,
-                    Role = userVM.Role,
-                    Active = true,
-                    ActiveDate = DateTime.Today
-                };
-                    
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(userVM);
+            return View(user);
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult Edit(string userName)
+        public ActionResult Edit(String userName)
         {
             if (userName == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            //User user = db.Users.Find(userID);
-            var user = db.Users
+            AccountDetailsViewModel user = db.Users
                 .Where(u => u.UserName == userName)
-                .Select(u => new AccountEditViewModel
+                .Select(u => new AccountDetailsViewModel
                 {
                     UserID = u.UserID,
                     UserName = u.UserName,
@@ -155,8 +144,7 @@ namespace Blip.Web.Controllers
                     Role = u.Role,
                     Active = u.Active,
                     ActiveDate = u.ActiveDate,
-                }).SingleOrDefault<AccountEditViewModel>();
-
+                }).SingleOrDefault<AccountDetailsViewModel>();
             if (user == null)
             {
                 return HttpNotFound();
@@ -167,29 +155,15 @@ namespace Blip.Web.Controllers
         [HttpPost]
         [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(AccountEditViewModel userVM)
+        public ActionResult Edit([Bind(Include = "UserID,UserName,Password,Role,Active,ActiveDate")] User user)
         {
-            if (userVM == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
             if (ModelState.IsValid)
             {
-                User userM = db.Users.Find(userVM.UserID);
-                bool wasActive = userM.Active;
-
-                userM.UserName = userVM.UserName;
-                userM.Password = userVM.Password;
-                userM.Role = userVM.Role;
-                userM.Active = userVM.Active;
-                if(!wasActive && userM.Active)
-                    userM.ActiveDate = DateTime.Today;
-                else
-                    userM.ActiveDate = userVM.ActiveDate;
-
-                db.Entry(userM).State = EntityState.Modified;
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(userVM);
+            return View(user);
         }
 
         [Authorize(Roles = "admin")]

@@ -147,9 +147,6 @@
       <DependentUpon>201506130359048_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountCreateViewModel.cs" />
-    <Compile Include="Models\AccountDetailsViewModel.cs" />
-    <Compile Include="Models\AccountEditViewModel.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\HomeIndexViewModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -164,13 +161,6 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Shared\_LayoutHeader.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Account\Details.cshtml" />
-    <Content Include="Views\Account\Create.cshtml" />
-    <Content Include="Views\Account\Edit.cshtml" />
-    <Content Include="Views\Account\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

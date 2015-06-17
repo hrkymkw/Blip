@@ -7,12 +7,11 @@ using System.Web.Mvc;
 
 namespace Blip.Web.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private BlipContext db = new BlipContext();
 
-        [AllowAnonymous]
+        // GET: Home
         public ActionResult Index()
         {
             var messageVM = db.Messages
