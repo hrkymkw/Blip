@@ -16,9 +16,14 @@
     else
     {
         <ul class="nav navbar-nav navbar-right">
-
             <li>
-                @Html.ActionLink("Login", "Login", "Account")
+                <form method="post" action="/account/login"id="loginForm">
+                    <label for="UserName" class="navLabel">Username:</label>
+                    <input type="text" name="UserName" id="UserName" />
+                    <label for="Password" class="navLabel">Password:</label>
+                    <input type="password" name="Password" id="Password" />
+                    <button id="Login" type="submit">Login</button>
+                </form>
             </li>
         </ul>
     }
