@@ -12,7 +12,7 @@ namespace Blip.Web.Controllers
     {
         private BlipContext db = new BlipContext();
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Index()
         {
             var messageVM = db.Messages

@@ -150,6 +150,8 @@
     <Compile Include="Models\AccountCreateViewModel.cs" />
     <Compile Include="Models\AccountDetailsViewModel.cs" />
     <Compile Include="Models\AccountEditViewModel.cs" />
+    <Compile Include="Models\AccountLoginViewModel.cs" />
+    <Compile Include="Models\AccountRegisterViewModel.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\HomeIndexViewModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -171,6 +173,7 @@
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

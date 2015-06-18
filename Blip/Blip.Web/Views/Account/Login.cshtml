@@ -1,10 +1,10 @@
-﻿@model Blip.Web.Models.User
+﻿@model Blip.Web.Models.AccountLoginViewModel
 
 @{
     ViewBag.Title = "Login";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Login if you want to Blip!</h2>
 
 
 @using (Html.BeginForm())
@@ -34,6 +34,10 @@
     </p>
 </fieldset>
 }
+
+<p>
+    @Html.ActionLink("Register to Blip!", "Register")
+</p>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>

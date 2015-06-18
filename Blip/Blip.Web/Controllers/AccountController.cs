@@ -23,7 +23,7 @@ namespace Blip.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(User model, string returnUrl)
+        public ActionResult Login(AccountLoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,49 @@ namespace Blip.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: Account
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(AccountRegisterViewModel userVM)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new Models.User()
+                {
+                    UserName = userVM.UserName,
+                    Password = userVM.Password,
+                    Role = nameof(UserRoles.user),
+                    Active = true,
+                    ActiveDate = DateTime.Today
+                };
+
+                db.Users.Add(user);
+                db.SaveChanges();
+
+                bool userValid = db.Users.Any(u => u.UserID == user.UserID);
+
+                if (userValid)
+                {
+                    FormsAuthentication.SetAuthCookie(user.UserName, false);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Registration failed.");
+                }
+
+                return RedirectToAction("Index","Home");
+            }
+
+            return View(userVM);
+        }
+
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             var userVM = db.Users.ToList()
@@ -136,7 +178,7 @@ namespace Blip.Web.Controllers
             return View(userVM);
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult Edit(string userName)
         {
             if (userName == null)
@@ -165,7 +207,7 @@ namespace Blip.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(AccountEditViewModel userVM)
         {
@@ -227,4 +269,11 @@ namespace Blip.Web.Controllers
             base.Dispose(disposing);
         }
     }
+}
+
+
+public enum UserRoles
+{
+    admin,
+    user
 }
