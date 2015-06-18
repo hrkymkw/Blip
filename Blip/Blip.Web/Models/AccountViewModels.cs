@@ -8,9 +8,13 @@ namespace Blip.Web.Models
 {
     public class AccountLoginViewModel
     {
+        [Required]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Password")]
         public string Password { get; set; }
-        public string Role { get; set; }
     }
 
     public class AccountRegisterViewModel
@@ -33,40 +37,69 @@ namespace Blip.Web.Models
 
     public class AccountIndexViewModel
     {
+        [Display(Name = "User ID")]
         public int UserID { get; set; }
+
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
+
         public string Password { get; set; }
+
         public string Role { get; set; }
+
         public bool Active { get; set; }
+
+        [Display(Name = "Active Date")]
         public DateTime ActiveDate { get; set; }
+
         public ICollection<string> SentMessages { get; set; }
+
         public ICollection<string> ReceivedMessages { get; set; }
     }
 
     public class AccountDetailsViewModel
     {
+        [Display(Name = "User ID")]
         public int UserID { get; set; }
+
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
+
         public string Password { get; set; }
+
         public string Role { get; set; }
+
         public bool Active { get; set; }
+
+        [Display(Name = "Active Date")]
         public DateTime ActiveDate { get; set; }
     }
 
     public class AccountCreateViewModel
     {
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
+
         public string Password { get; set; }
+
         public string Role { get; set; }
     }
 
     public class AccountEditViewModel
     {
+        [Display(Name = "User ID")]
         public int UserID { get; set; }
+
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
+
         public string Password { get; set; }
+
         public string Role { get; set; }
+
         public bool Active { get; set; }
+
+        [Display(Name = "Active Date")]
         public DateTime ActiveDate { get; set; }
     }
 }
