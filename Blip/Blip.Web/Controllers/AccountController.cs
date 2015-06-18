@@ -97,9 +97,10 @@ namespace Blip.Web.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Registration failed.");
+                    return View();
                 }
 
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(userVM);

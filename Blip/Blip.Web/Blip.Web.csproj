@@ -147,15 +147,10 @@
       <DependentUpon>201506130359048_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountCreateViewModel.cs" />
-    <Compile Include="Models\AccountDetailsViewModel.cs" />
-    <Compile Include="Models\AccountEditViewModel.cs" />
-    <Compile Include="Models\AccountLoginViewModel.cs" />
-    <Compile Include="Models\AccountRegisterViewModel.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\HomeIndexViewModel.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\AccountIndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
