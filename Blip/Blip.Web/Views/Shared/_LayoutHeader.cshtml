@@ -9,11 +9,18 @@
             @Html.ActionLink("Blip!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
+
+        @if (Request.IsAuthenticated)
+        {
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Admin", "Index", "Account")</li>
+                @if (User.IsInRole("admin"))
+                {
+                    <li>@Html.ActionLink("Admin", "Index", "Account")</li>
+                }               
             </ul>
             @Html.Partial("_LoginPartial")
+        }
         </div>
     </div>
 </div>

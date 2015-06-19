@@ -60,7 +60,10 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { userName = Model.UserName }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Edit", "Edit", new { userName = Model.UserName }, new { @class = "btn btn-default" })
+        <input type="button" value="Return" class="btn btn-default" onclick="location.href = 'javascript:history.back()';" />
+    </div>
+</div>

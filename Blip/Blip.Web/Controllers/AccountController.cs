@@ -270,11 +270,12 @@ namespace Blip.Web.Controllers
             base.Dispose(disposing);
         }
     }
+
+    public enum UserRoles
+    {
+        admin,
+        user
+    }
 }
 
 
-public enum UserRoles
-{
-    admin,
-    user
-}
