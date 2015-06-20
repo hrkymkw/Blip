@@ -9,15 +9,18 @@ namespace Blip.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            BundleTable.EnableOptimizations = false;
+
             bundles.Add(new ScriptBundle("~/bundles/konami").Include(
                         "~/Scripts/konami.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/alertify").Include(
             "~/Scripts/alertify/alertify.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/alertifycss").Include("~/Content/alertify/alertify.default.css", "~/Content/alertify/alertify.core.css", "~/Content/alertify/alertify.bootstrap.css"));
+            bundles.Add(new StyleBundle("~/bundles/maincss").Include("~/Content/alertify/alertify.default.css", "~/Content/alertify/alertify.core.css", 
+                "~/Content/alertify/alertify.bootstrap.css", "~/Content/css/font-awesome.css"));
 
-            BundleTable.EnableOptimizations = false;
+            
         }
     }
 }

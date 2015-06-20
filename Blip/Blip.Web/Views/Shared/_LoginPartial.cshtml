@@ -1,0 +1,29 @@
+﻿<div class = "navbar-right">
+
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+
+            <li>
+                @Html.ActionLink("Logged in as: " + @User.Identity.Name, "Details", "Account", routeValues: new { userName = @User.Identity.Name }, htmlAttributes: new { title = "Account Details" })            
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+
+    @*else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <form method="post" action="/account/login"id="loginForm">
+                    <label for="UserName" class="navLabel">Username:</label>
+                    <input type="text" name="UserName" id="UserName" />
+                    <label for="Password" class="navLabel">Password:</label>
+                    <input type="password" name="Password" id="Password" />
+                    <button id="Login" type="submit">Login</button>
+                </form>
+            </li>
+        </ul>
+    }*@
+</div>
