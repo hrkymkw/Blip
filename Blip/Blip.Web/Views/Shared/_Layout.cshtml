@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - Blip!</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="@System.Web.Optimization.Styles.Url("~/bundles/alertifycss")" rel="stylesheet" type="text/css" />
+    <link href="@System.Web.Optimization.Styles.Url("~/bundles/maincss")" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -25,14 +25,7 @@
         </footer>
     </div>
     <div id="konamiCheat" style="display: none;">
-        <button id="showBrs">Show me Bathroom selfie!</button>
-        <button id="showPtf">Show me Pouty Trout Face!</button>
-        <div id="brs" class="cheatArea" style="display: none;">
-            <img src="BathroomSelfie.jpg" alt="Bathroom Selfie Here">
-        </div>
-        <div id="ptf" class="cheatArea" style="display: none;">
-            <img src="PoutyTroutFace.jpg" alt="Pouty Trout Face Here">
-        </div>
+        <i class="fa fa-key" onclick="alert('Do something here');">Achievement Unlocked - Click Here</i>       
     </div>
 </body>
 </html>

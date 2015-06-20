@@ -57,21 +57,12 @@ $(document).ready(function () {
     $(window).konami({
         code: [38, 40,  37, 39, 66, 65],
         cheat: function () {
-            alertify.alert('Achievement Unlocked', function () {
-                $('#konamiCheat').show();
-
-                $('.cheatArea').css("background-color", "orange");                                    
-
-                $('#showBrs').click(function () {
-                    $('#brs').show();
-                    $(this).hide();
-                    return false;
-                });
-                $('#showPtf').click(function () {
-                    $('#ptf').show();
-                    $(this).hide();
-                    return false;
-                });
+            alertify.confirm('Achievement Unlocked. Enter funkytown?', function (e) {
+                if (e) {
+                    $('#konamiCheat').show();
+                }
+                else {
+                }
             });
 
         }
