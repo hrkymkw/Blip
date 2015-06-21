@@ -1,0 +1,55 @@
+﻿@model Blip.Web.Models.HomeMessageViewModel
+@{
+    ViewBag.Title = "Message";
+}
+
+<h2>Send Message</h2>
+
+@using (Html.BeginForm("Message", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="list-group col-md-2">
+        <h4>Select Recipients</h4>
+        <hr />
+        <br />
+        @Html.ListBoxFor(m => m.messageVM.Receivers,
+            new MultiSelectList(Model.usersVM, "UserID", "UserName"),
+            new { @class="list-group-item" })
+        @Html.ValidationMessageFor(m => m.messageVM.Receivers)
+    </div>
+
+    <div class="col-md-10">
+        <div class="form-horizontal">
+            <h4>Message</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.messageVM.Title, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.messageVM.Title, new { style = "width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.messageVM.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.messageVM.Body, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.messageVM.Body, 10, 1, new { style = "width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.messageVM.Body)
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.messageVM.Sender)
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="button" value="Cancel" class="btn btn-default" onclick="location.href = 'javascript:history.back()';" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

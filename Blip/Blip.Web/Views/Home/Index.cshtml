@@ -48,3 +48,9 @@
         </tr>
     }
 </table>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Create Message", "Message", new { sender = User.Identity.Name }, new { @class = "btn btn-default" })
+    </div>
+</div>

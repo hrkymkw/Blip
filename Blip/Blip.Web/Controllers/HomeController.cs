@@ -1,5 +1,6 @@
 ﻿using Blip.Web.DAL;
 using Blip.Web.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -15,9 +16,8 @@ namespace Blip.Web.Controllers
         //[AllowAnonymous]
         public ActionResult Index()
         {
-            var messageVM = db.Messages
+            var hiVM = db.Messages
                 .Include(m => m.Receivers)
-                .ToList()
                 .Select(m => new HomeIndexViewModel
                 {
                     MessageID = m.MessageID,
@@ -25,9 +25,65 @@ namespace Blip.Web.Controllers
                     DateTime = m.DateTime,
                     Body = m.Body,
                     Sender = m.Sender.UserName,
-                    Receivers = m.Receivers.Select(r => r.UserName).ToList().ToArray()
+                    Receivers = m.Receivers.Select(r => r.UserName).ToList()
                 });
-            return View(messageVM);
+
+            return View(hiVM);
+        }
+
+        public ActionResult Message(string sender)
+        {
+            HomeMessageViewModel hmVM = new HomeMessageViewModel();
+
+            hmVM.usersVM = db.Users
+                .Where(u => u.Active == true)
+                .Select(u => new HomeMessageUserViewModel
+                {
+                    UserID = u.UserID,
+                    UserName = u.UserName
+                }).ToList();
+
+            hmVM.messageVM = new HomeMessageMessageViewModel();
+            hmVM.messageVM.Sender = sender;
+
+            return View(hmVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Message(HomeMessageViewModel hmVM)
+        {
+            if(ModelState.IsValid)
+            {
+                Message message = new Message()
+                {
+                    Title = hmVM.messageVM.Title,
+                    DateTime = DateTime.Today,
+                    Body = hmVM.messageVM.Body,
+                    Sender = db.Users
+                        .Where(u => u.UserName == hmVM.messageVM.Sender)
+                        .SingleOrDefault<User>(),
+                    Receivers = db.Users
+                        .Where(u => hmVM.messageVM.Receivers.Any(r => r == u.UserID))
+                        .ToList<User>()
+                };
+
+                db.Messages.Add(message);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            // If the ModelState is invalid, repopulate usersVM for the multiselect list
+            hmVM.usersVM = db.Users
+                .Where(u => u.Active == true)
+                .Select(u => new HomeMessageUserViewModel
+                {
+                    UserID = u.UserID,
+                    UserName = u.UserName
+                }).ToList();
+
+            return View(hmVM);
         }
 
         protected override void Dispose(bool disposing)
