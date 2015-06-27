@@ -1,5 +1,7 @@
 ﻿using Blip.Web.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
 
 namespace Blip.Web.DAL
 {
@@ -33,6 +35,16 @@ namespace Blip.Web.DAL
                         um.ToTable("UserMessageReceived");
                     }
                 );
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.UserName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation( new IndexAttribute("UX_UserName") { IsUnique = true })
+                );
+
         }
     }
 }
