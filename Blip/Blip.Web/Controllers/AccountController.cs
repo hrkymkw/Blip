@@ -32,7 +32,7 @@ namespace Blip.Web.Controllers
                     string username = model.UserName;
                     string password = model.Password;
 
-                    bool userValid = bContext.Users.Any(user => user.UserName == username && user.Password == password);
+                    bool userValid = bContext.Users.Any(user => user.UserName == username && user.Password == password && user.Active == true);
 
                     if (userValid)
                     {
