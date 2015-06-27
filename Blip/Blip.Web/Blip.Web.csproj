@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201506130359048_InitialCreate.Designer.cs">
       <DependentUpon>201506130359048_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506271723478_AddUserNameUniqueIndex.cs" />
+    <Compile Include="Migrations\201506271723478_AddUserNameUniqueIndex.Designer.cs">
+      <DependentUpon>201506271723478_AddUserNameUniqueIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\HomeViewModels.cs" />
@@ -191,6 +195,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506130359048_InitialCreate.resx">
       <DependentUpon>201506130359048_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506271723478_AddUserNameUniqueIndex.resx">
+      <DependentUpon>201506271723478_AddUserNameUniqueIndex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

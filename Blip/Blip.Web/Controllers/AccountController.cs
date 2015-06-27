@@ -76,31 +76,39 @@ namespace Blip.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new Models.User()
+                if(db.Users.Any(u => u.UserName == userVM.UserName))
                 {
-                    UserName = userVM.UserName,
-                    Password = userVM.Password,
-                    Role = nameof(UserRoles.user),
-                    Active = true,
-                    ActiveDate = DateTime.Today
-                };
-
-                db.Users.Add(user);
-                db.SaveChanges();
-
-                bool userValid = db.Users.Any(u => u.UserID == user.UserID);
-
-                if (userValid)
-                {
-                    FormsAuthentication.SetAuthCookie(user.UserName, false);
+                    ViewBag.ErrorMessage = "User Name, " + userVM.UserName + ", already exists.";
+                    return View(userVM);
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Registration failed.");
-                    return View();
-                }
+                    User user = new Models.User()
+                    {
+                        UserName = userVM.UserName,
+                        Password = userVM.Password,
+                        Role = nameof(UserRoles.user),
+                        Active = true,
+                        ActiveDate = DateTime.Today
+                    };
 
-                return RedirectToAction("Index", "Home");
+                    db.Users.Add(user);
+                    db.SaveChanges();
+
+                    bool userValid = db.Users.Any(u => u.UserID == user.UserID);
+
+                    if (userValid)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.UserName, false);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Registration failed.");
+                        return View();
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             return View(userVM);
@@ -162,18 +170,26 @@ namespace Blip.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new Models.User()
+                if (db.Users.Any(u => u.UserName == userVM.UserName))
                 {
-                    UserName = userVM.UserName,
-                    Password = userVM.Password,
-                    Role = userVM.Role,
-                    Active = true,
-                    ActiveDate = DateTime.Today
-                };
-                    
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    ViewBag.ErrorMessage = "User Name, " + userVM.UserName + ", already exists.";
+                    return View(userVM);
+                }
+                else
+                {
+                    User user = new Models.User()
+                    {
+                        UserName = userVM.UserName,
+                        Password = userVM.Password,
+                        Role = userVM.Role,
+                        Active = true,
+                        ActiveDate = DateTime.Today
+                    };
+
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(userVM);
