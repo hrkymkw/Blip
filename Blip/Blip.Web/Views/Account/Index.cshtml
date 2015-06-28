@@ -6,45 +6,58 @@
 
 <h2>@ViewBag.Title</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th></th>
-    </tr>
+<div id="tabs">
+    <ul>
+        <li><a href=#ActiveUsers>Active Users</a></li>
+        <li><a href=#InactiveUsers>Inactive/Deleted Users</a></li>
+    </ul>
+    @foreach (var i in Model.Select(a => a.Active).ToList<bool>().Distinct())
+    {
+        string tabId = (i == true) ? "ActiveUsers" : "InactiveUsers";
+        <div id=@tabId>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Role)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </th>
+                    <th></th>
+                </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
-            @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
-            @Html.ActionLink("Delete", "Delete", new { userName = item.UserName })
-        </td>
-    </tr>
-}
-</table>
+                @foreach (var item in Model.Where(a => a.Active == i))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Active)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
+                            @Html.ActionLink("Details", "Details", new { userName = item.UserName }) |
+                            @Html.ActionLink("Delete", "Delete", new { userName = item.UserName })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")

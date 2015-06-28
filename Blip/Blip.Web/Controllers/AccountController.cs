@@ -127,7 +127,7 @@ namespace Blip.Web.Controllers
                     Role = u.Role,
                     Active = u.Active,
                     ActiveDate = u.ActiveDate,
-                });
+                }); 
             return View(userVM);
         }
 
