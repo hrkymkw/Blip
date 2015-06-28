@@ -78,7 +78,7 @@ namespace Blip.Web.Controllers
             {
                 if(db.Users.Any(u => u.UserName == userVM.UserName))
                 {
-                    ViewBag.ErrorMessage = "User Name, " + userVM.UserName + ", already exists.";
+                    ViewBag.ErrorMessage = "* User Name \"" + userVM.UserName + "\" already exists.";
                     return View(userVM);
                 }
                 else
@@ -172,7 +172,7 @@ namespace Blip.Web.Controllers
             {
                 if (db.Users.Any(u => u.UserName == userVM.UserName))
                 {
-                    ViewBag.ErrorMessage = "User Name, " + userVM.UserName + ", already exists.";
+                    ViewBag.ErrorMessage = "* User Name \"" + userVM.UserName + "\" already exists.";
                     return View(userVM);
                 }
                 else

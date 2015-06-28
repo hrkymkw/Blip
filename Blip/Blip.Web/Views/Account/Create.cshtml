@@ -14,7 +14,7 @@
         <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @ViewBag.ErrorMessage
+        <div class="validation-summary-errors text-danger">&emsp;&emsp;@Html.Raw(@ViewBag.ErrorMessage)</div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })

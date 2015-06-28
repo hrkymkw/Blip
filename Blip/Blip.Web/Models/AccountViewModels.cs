@@ -75,9 +75,11 @@ namespace Blip.Web.Models
 
     public class AccountCreateViewModel
     {
+        [Required]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
+        [Required]
         public string Password { get; set; }
 
         public string Role { get; set; }
@@ -88,15 +90,18 @@ namespace Blip.Web.Models
         [Display(Name = "User ID")]
         public int UserID { get; set; }
 
+        [Required]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
+        [Required]
         public string Password { get; set; }
 
         public string Role { get; set; }
 
         public bool Active { get; set; }
 
+        [Required]
         [Display(Name = "Active Date")]
         public DateTime ActiveDate { get; set; }
     }
