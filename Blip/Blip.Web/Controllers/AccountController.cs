@@ -258,7 +258,7 @@ namespace Blip.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.SingleOrDefault<User>(u => u.UserName == userName);
+            User user = db.Users.SingleOrDefault<User>(u => u.UserName == userName && u.Active == true);
             if (user == null)
             {
                 return HttpNotFound();
@@ -272,6 +272,13 @@ namespace Blip.Web.Controllers
         public ActionResult DeleteConfirmed(String userName)
         {
             User user = db.Users.SingleOrDefault<User>(u => u.UserName == userName);
+            if (db.Messages.Any(m => m.Sender.UserID == user.UserID || m.Receivers.Any(r => r.UserID == user.UserID)))
+            {
+                user.Active = false;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
