@@ -33,10 +33,11 @@ namespace Blip.Web.Controllers
 
         public ActionResult Message(string sender)
         {
+            sender = (sender == User.Identity.Name) ? sender : User.Identity.Name;
             HomeMessageViewModel hmVM = new HomeMessageViewModel();
 
             hmVM.usersVM = db.Users
-                .Where(u => u.Active == true)
+                .Where(u => u.Active == true && u.UserName != sender)
                 .Select(u => new HomeMessageUserViewModel
                 {
                     UserID = u.UserID,
