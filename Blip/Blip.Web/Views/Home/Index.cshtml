@@ -4,7 +4,24 @@
     ViewBag.Title = "Home Page";
 }
 <h2>@ViewBag.Title</h2>
-<table class="table">
+<script type="text/javascript">
+    $(document).ready(function () {
+        var user = '@User.Identity.Name';
+        $('#messages > tbody > tr').each(function () {
+            $(this).find('td').each(function () {
+                $('.' + user + 'Received').css({
+                    "font-weight": "Bold",
+                    'color' : 'Green'
+                });
+                $('.' + user + 'Sent').css({
+                    "font-weight": "Bold",
+                    'color': 'Red'
+                });
+            });            
+        });
+    });
+</script>
+<table id="messages" class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -31,12 +48,12 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sender)
+                <p class='@String.Concat(item.Sender, "Sent")'>@Html.DisplayFor(modelItem => item.Sender)</p>
             </td>
             <td>
                 @foreach (var receiver in item.Receivers)
                 {
-                    @Html.DisplayFor(modelItem => receiver)<br />
+                    <p class='@String.Concat(receiver, "Received")'>@Html.DisplayFor(modelItem => receiver)</p>
                 }
             </td>
             <td>
