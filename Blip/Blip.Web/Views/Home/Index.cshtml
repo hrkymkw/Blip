@@ -9,6 +9,11 @@
         var user = '@User.Identity.Name';
         $('#messages > tbody > tr').each(function () {
             $(this).find('td').each(function () {
+                $(this).click(function () {
+                    var messageBody = $($(this).parent().children()[4]).html();
+                    $('#messageBody').html(messageBody);
+                    $('#messageDialog').dialog();
+                });                
                 $('.' + user + 'Received').css({
                     "font-weight": "Bold",
                     'color' : 'Green'
@@ -18,7 +23,7 @@
                     'color': 'Red'
                 });
             });            
-        });
+        });        
     });
 </script>
 <table id="messages" class="table">
@@ -70,4 +75,8 @@
     <div class="col-md-offset-2 col-md-10">
         @Html.ActionLink("Create Message", "Message", new { sender = User.Identity.Name }, new { @class = "btn btn-default" })
     </div>
+</div>
+
+<div id="messageDialog" style="display:none">
+    <span id="messageBody"></span>
 </div>
