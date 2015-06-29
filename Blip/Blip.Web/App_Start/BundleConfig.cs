@@ -11,16 +11,14 @@ namespace Blip.Web
         {
             BundleTable.EnableOptimizations = false;
 
-            bundles.Add(new ScriptBundle("~/bundles/konami").Include(
-                        "~/Scripts/konami.js"));
+            bundles.Add(new ScriptBundle("~/bundles/mainjs").Include(
+             "~/Scripts/bootstrap.min.js", "~/Scripts/jquery-1.10.2.min.js", "~/Scripts/alertify/alertify.js",
+             "~/Scripts/modernizr-2.6.2.js", "~/Scripts/jquery-ui-1.11.4.min.js", "~/Scripts/konami.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/alertify").Include(
-            "~/Scripts/alertify/alertify.js"));
-
-            bundles.Add(new StyleBundle("~/bundles/maincss").Include("~/Content/alertify/alertify.default.css", "~/Content/alertify/alertify.core.css", 
-                "~/Content/alertify/alertify.bootstrap.css", "~/Content/css/font-awesome.css"));
-
-            
+            bundles.Add(new StyleBundle("~/bundles/maincss").Include("~/Content/Site.css",
+            "~/Content/bootstrap.min.css", "~/Content/themes/base/jquery-ui.css",
+            "~/Content/alertify/alertify.default.css", "~/Content/alertify/alertify.core.css",
+             "~/Content/alertify/alertify.bootstrap.css", "~/Content/css/font-awesome.css"));
         }
     }
 }
