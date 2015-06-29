@@ -16,6 +16,8 @@ namespace Blip.Web.Controllers
         //[AllowAnonymous]
         public ActionResult Index()
         {
+            string userName = User.Identity.Name;
+
             var hiVM = db.Messages
                 .Include(m => m.Receivers)
                 .Select(m => new HomeIndexViewModel
@@ -26,7 +28,7 @@ namespace Blip.Web.Controllers
                     Body = m.Body,
                     Sender = m.Sender.UserName,
                     Receivers = m.Receivers.Select(r => r.UserName).ToList()
-                });
+                }).Where(m => m.Sender == userName || m.Receivers.Contains(userName));
 
             return View(hiVM);
         }
