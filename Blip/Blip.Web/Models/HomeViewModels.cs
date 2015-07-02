@@ -23,33 +23,33 @@ namespace Blip.Web.Models
 
     public class HomeMessageViewModel
     {
-        public ICollection<HomeMessageUserViewModel> usersVM { get; set; }
+        public ICollection<ReceiverIC> Receivers { get; set; }
 
-        public HomeMessageMessageViewModel messageVM { get; set; }
-    }
+        public MessageIC Message { get; set; }
 
-    public class HomeMessageUserViewModel
-    {
-        [Display(Name = "User ID")]
-        public int UserID { get; set; }
+        public class ReceiverIC
+        {
+            [Display(Name = "User ID")]
+            public int UserID { get; set; }
 
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
-    }
+            [Display(Name = "User Name")]
+            public string UserName { get; set; }
+        }
 
-    public class HomeMessageMessageViewModel
-    {
-        [Required(ErrorMessage = "You must provide Title.")]
-        public string Title { get; set; }
+        public class MessageIC
+        {
+            [Required(ErrorMessage = "You must provide Title.")]
+            public string Title { get; set; }
 
-        [Required(ErrorMessage = "Message cannot be empty.")]
-        [DataType(DataType.MultilineText)]
-        public string Body { get; set; }
+            [Required(ErrorMessage = "Message cannot be empty.")]
+            [DataType(DataType.MultilineText)]
+            public string Body { get; set; }
 
-        public string Sender { get; set; }
+            public string Sender { get; set; }
 
-        [Required(ErrorMessage = "You must select recipients.")]
-        public List<int> Receivers { get; set; }
+            [Required(ErrorMessage = "You must select recipients.")]
+            public List<int> Receivers { get; set; }
+        }
     }
 
 }

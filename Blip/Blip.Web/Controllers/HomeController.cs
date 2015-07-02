@@ -38,16 +38,16 @@ namespace Blip.Web.Controllers
             sender = (sender == User.Identity.Name) ? sender : User.Identity.Name;
             HomeMessageViewModel hmVM = new HomeMessageViewModel();
 
-            hmVM.usersVM = db.Users
+            hmVM.Receivers = db.Users
                 .Where(u => u.Active == true && u.UserName != sender)
-                .Select(u => new HomeMessageUserViewModel
+                .Select(u => new HomeMessageViewModel.ReceiverIC
                 {
                     UserID = u.UserID,
                     UserName = u.UserName
                 }).ToList();
 
-            hmVM.messageVM = new HomeMessageMessageViewModel();
-            hmVM.messageVM.Sender = sender;
+            hmVM.Message = new HomeMessageViewModel.MessageIC();
+            hmVM.Message.Sender = sender;
 
             return View(hmVM);
         }
@@ -60,14 +60,14 @@ namespace Blip.Web.Controllers
             {
                 Message message = new Message()
                 {
-                    Title = hmVM.messageVM.Title,
+                    Title = hmVM.Message.Title,
                     DateTime = DateTime.Today,
-                    Body = hmVM.messageVM.Body,
+                    Body = hmVM.Message.Body,
                     Sender = db.Users
-                        .Where(u => u.UserName == hmVM.messageVM.Sender)
+                        .Where(u => u.UserName == hmVM.Message.Sender)
                         .SingleOrDefault<User>(),
                     Receivers = db.Users
-                        .Where(u => hmVM.messageVM.Receivers.Any(r => r == u.UserID))
+                        .Where(u => hmVM.Message.Receivers.Any(r => r == u.UserID))
                         .ToList<User>()
                 };
 
@@ -77,10 +77,10 @@ namespace Blip.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            // If the ModelState is invalid, repopulate usersVM for the multiselect list
-            hmVM.usersVM = db.Users
+            // If the ModelState is invalid, repopulate Receivers for the multiselect list
+            hmVM.Receivers = db.Users
                 .Where(u => u.Active == true)
-                .Select(u => new HomeMessageUserViewModel
+                .Select(u => new HomeMessageViewModel.ReceiverIC
                 {
                     UserID = u.UserID,
                     UserName = u.UserName

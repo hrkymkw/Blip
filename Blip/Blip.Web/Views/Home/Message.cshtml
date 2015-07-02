@@ -14,10 +14,10 @@
         <h4>Select Recipients</h4>
         <hr />
         <br />
-        @Html.ListBoxFor(m => m.messageVM.Receivers,
-            new MultiSelectList(Model.usersVM, "UserID", "UserName"),
+        @Html.ListBoxFor(m => m.Message.Receivers,
+            new MultiSelectList(Model.Receivers, "UserID", "UserName"),
             new { @class="list-group-item" })
-        @Html.ValidationMessageFor(m => m.messageVM.Receivers)
+        @Html.ValidationMessageFor(m => m.Message.Receivers)
     </div>
 
     <div class="col-md-10">
@@ -27,22 +27,22 @@
             @Html.ValidationSummary(true)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.messageVM.Title, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Message.Title, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.messageVM.Title, new { style = "width: 100%;" })
-                    @Html.ValidationMessageFor(model => model.messageVM.Title)
+                    @Html.TextBoxFor(model => model.Message.Title, new { style = "width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.Message.Title)
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.messageVM.Body, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Message.Body, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.messageVM.Body, 10, 1, new { style = "width: 100%;" })
-                    @Html.ValidationMessageFor(model => model.messageVM.Body)
+                    @Html.TextAreaFor(model => model.Message.Body, 10, 1, new { style = "width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.Message.Body)
                 </div>
             </div>
 
-            @Html.HiddenFor(model => model.messageVM.Sender)
+            @Html.HiddenFor(model => model.Message.Sender)
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
