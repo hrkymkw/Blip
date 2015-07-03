@@ -117,9 +117,10 @@ namespace Blip.Web.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            var userVM = db.Users.ToList()
+            AccountIndexViewModel aiVM = new AccountIndexViewModel();
+            aiVM.ListOfUsers = db.Users
                 //.Where(u => u.Active == true)
-                .Select(u => new AccountIndexViewModel
+                .Select(u => new AccountIndexViewModel.UserIC
                 {
                     UserID = u.UserID,
                     UserName = u.UserName,
@@ -127,8 +128,8 @@ namespace Blip.Web.Controllers
                     Role = u.Role,
                     Active = u.Active,
                     ActiveDate = u.ActiveDate,
-                }); 
-            return View(userVM);
+                }).ToList<AccountIndexViewModel.UserIC>(); 
+            return View(aiVM);
         }
 
         public ActionResult Details(String userName)

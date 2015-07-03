@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blip.Web.Models.AccountIndexViewModel>
+﻿@model Blip.Web.Models.AccountIndexViewModel
 
 @{
     ViewBag.Title = "Users";
@@ -11,28 +11,40 @@
         <li><a href=#ActiveUsers>Active Users</a></li>
         <li><a href=#InactiveUsers>Inactive/Deleted Users</a></li>
     </ul>
-    @foreach (var i in Model.Select(a => a.Active).ToList<bool>().Distinct())
+    @foreach (var i in @Model.ListOfUsers.Select(a => a.Active).ToList<bool>().Distinct())
     {
         string tabId = (i == true) ? "ActiveUsers" : "InactiveUsers";
         <div id=@tabId>
             <table class="table">
                 <tr>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.ListOfUsers.FirstOrDefault().UserName)
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.UserName)
                     </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.ListOfUsers.FirstOrDefault().Password)
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Password)
                     </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.ListOfUsers.FirstOrDefault().Role)
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Role)
                     </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.ListOfUsers.FirstOrDefault().Active)
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Active)
                     </th>
                     <th></th>
                 </tr>
 
-                @foreach (var item in Model.Where(a => a.Active == i))
+                @foreach (var item in @Model.ListOfUsers.Where(a => a.Active == i))
                 {
                     <tr>
                         <td>
