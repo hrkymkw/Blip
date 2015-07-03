@@ -6,19 +6,24 @@ namespace Blip.Web.Models
 {
     public class HomeIndexViewModel
     {
-        [Display(Name = "Message ID")]
-        public int MessageID { get; set; }
+        public ICollection<MessageIC> Messages { get; set; }
 
-        public string Title { get; set; }
+        public class MessageIC
+        {
+            [Display(Name = "Message ID")]
+            public int MessageID { get; set; }
 
-        [Display(Name = "Date")]
-        public DateTime DateTime { get; set; }
+            public string Title { get; set; }
 
-        public string Body { get; set; }
+            [Display(Name = "Date")]
+            public DateTime DateTime { get; set; }
 
-        public string Sender { get; set; }
+            public string Body { get; set; }
 
-        public ICollection<string> Receivers { get; set; }
+            public string Sender { get; set; }
+
+            public ICollection<string> Receivers { get; set; }
+        }
     }
 
     public class HomeMessageViewModel

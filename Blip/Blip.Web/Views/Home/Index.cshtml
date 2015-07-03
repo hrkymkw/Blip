@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blip.Web.Models.HomeIndexViewModel> 
+﻿@model Blip.Web.Models.HomeIndexViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -29,24 +29,24 @@
 <table id="messages" class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sender)
+            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Sender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Receivers)
+            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Receivers)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateTime)
+            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().DateTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
+            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Body)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Messages)
     {
         <tr>
             <td>

@@ -17,10 +17,11 @@ namespace Blip.Web.Controllers
         public ActionResult Index()
         {
             string userName = User.Identity.Name;
+            HomeIndexViewModel hiVM = new HomeIndexViewModel();
 
-            var hiVM = db.Messages
+            hiVM.Messages = db.Messages
                 .Include(m => m.Receivers)
-                .Select(m => new HomeIndexViewModel
+                .Select(m => new HomeIndexViewModel.MessageIC
                 {
                     MessageID = m.MessageID,
                     Title = m.Title,
@@ -28,7 +29,8 @@ namespace Blip.Web.Controllers
                     Body = m.Body,
                     Sender = m.Sender.UserName,
                     Receivers = m.Receivers.Select(r => r.UserName).ToList()
-                }).Where(m => m.Sender == userName || m.Receivers.Contains(userName));
+                }).Where(m => m.Sender == userName || m.Receivers.Contains(userName))
+                .ToList<HomeIndexViewModel.MessageIC>();
 
             return View(hiVM);
         }
