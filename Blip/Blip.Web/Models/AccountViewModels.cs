@@ -39,10 +39,10 @@ namespace Blip.Web.Models
 
         public class UserIC
         {
-            //[Display(Name = "User ID")]
+            [Display(Name = "User ID")]
             public int UserID { get; set; }
 
-            //[Display(Name = "User Name")]
+            [Display(Name = "User Name")]
             public string UserName { get; set; }
 
             public string Password { get; set; }
@@ -51,28 +51,9 @@ namespace Blip.Web.Models
 
             public bool Active { get; set; }
 
-            //[Display(Name = "Active Date")]
+            [Display(Name = "Active Date")]
             public DateTime ActiveDate { get; set; }
         }
-
-        //The following properties are added just for Data Annotation use.////////////////////////////
-        //@Html.DisplayNameFor cannot display the data annotation if the inner class value is null////
-        // TODO Find out if there is a way to use inner class data annotation even if it is null
-        [Display(Name = "User ID")]
-        public int UserID { get; set; }
-
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
-
-        public string Role { get; set; }
-
-        public bool Active { get; set; }
-
-        [Display(Name = "Active Date")]
-        public DateTime ActiveDate { get; set; }
-        //////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     public class AccountDetailsViewModel
