@@ -114,42 +114,20 @@ namespace Blip.Web.Controllers
             return View(userVM);
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            AccountIndexViewModel aiVM = new AccountIndexViewModel();
-            aiVM.ListOfUsers = db.Users
-                //.Where(u => u.Active == true)
-                .Select(u => new AccountIndexViewModel.UserIC
-                {
-                    UserID = u.UserID,
-                    UserName = u.UserName,
-                    Password = u.Password,
-                    Role = u.Role,
-                    Active = u.Active,
-                    ActiveDate = u.ActiveDate,
-                }).ToList<AccountIndexViewModel.UserIC>(); 
-            return View(aiVM);
-        }
-
-        public ActionResult Details(String userName)
-        {
-            if (userName == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            string userName = User.Identity.Name;
 
             var user = db.Users
                 .Where(u => u.UserName == userName)
-                .Select(u => new AccountDetailsViewModel
+                .Select(u => new AccountIndexViewModel
                 {
-                    UserID = u.UserID,
                     UserName = u.UserName,
                     Password = u.Password,
                     Role = u.Role,
                     Active = u.Active,
                     ActiveDate = u.ActiveDate,
-                }).SingleOrDefault<AccountDetailsViewModel>();
+                }).SingleOrDefault<AccountIndexViewModel>();
 
             if (user == null)
             {
@@ -158,63 +136,16 @@ namespace Blip.Web.Controllers
             return View(user);
         }
 
-        [Authorize(Roles = "admin")]
-        public ActionResult Create()
+        public ActionResult Edit()
         {
-            return View();
-        }
+            string userName = User.Identity.Name;
 
-        [HttpPost]
-        [Authorize(Roles = "admin")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(AccountCreateViewModel userVM)
-        {
-            if (ModelState.IsValid)
-            {
-                if (db.Users.Any(u => u.UserName == userVM.UserName))
-                {
-                    ViewBag.ErrorMessage = "* User Name \"" + userVM.UserName + "\" already exists.";
-                    return View(userVM);
-                }
-                else
-                {
-                    User user = new Models.User()
-                    {
-                        UserName = userVM.UserName,
-                        Password = userVM.Password,
-                        Role = userVM.Role,
-                        Active = true,
-                        ActiveDate = DateTime.Today
-                    };
-
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-
-            return View(userVM);
-        }
-
-        //[Authorize(Roles = "admin")]
-        public ActionResult Edit(string userName)
-        {
-            if (userName == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            //User user = db.Users.Find(userID);
             var user = db.Users
                 .Where(u => u.UserName == userName)
                 .Select(u => new AccountEditViewModel
                 {
                     UserID = u.UserID,
-                    UserName = u.UserName,
                     Password = u.Password,
-                    Role = u.Role,
-                    Active = u.Active,
-                    ActiveDate = u.ActiveDate,
                 }).SingleOrDefault<AccountEditViewModel>();
 
             if (user == null)
@@ -234,55 +165,14 @@ namespace Blip.Web.Controllers
             if (ModelState.IsValid)
             {
                 User userM = db.Users.Find(userVM.UserID);
-                bool wasActive = userM.Active;
 
-                userM.UserName = userVM.UserName;
                 userM.Password = userVM.Password;
-                userM.Role = userVM.Role;
-                userM.Active = userVM.Active;
-                if(!wasActive && userM.Active)
-                    userM.ActiveDate = DateTime.Today;
-                else
-                    userM.ActiveDate = userVM.ActiveDate;
 
                 db.Entry(userM).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(userVM);
-        }
-
-        [Authorize(Roles = "admin")]
-        public ActionResult Delete(String userName)
-        {
-            if (userName == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.SingleOrDefault<User>(u => u.UserName == userName && u.Active == true);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "admin")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(String userName)
-        {
-            User user = db.Users.SingleOrDefault<User>(u => u.UserName == userName);
-            if (db.Messages.Any(m => m.Sender.UserID == user.UserID || m.Receivers.Any(r => r.UserID == user.UserID)))
-            {
-                user.Active = false;
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

@@ -1,13 +1,14 @@
-﻿@model Blip.Web.Models.AccountDetailsViewModel
-
+﻿@model Blip.Web.Areas.Admin.Models.AdminDeleteViewModel
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Delete User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
+<h4>Are you sure you want to delete this user?</h4>
 <div>
-    <h4>User</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -51,19 +52,21 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ActiveDate) 
+            @Html.DisplayNameFor(model => model.ActiveDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ActiveDate)
         </dd>
-
     </dl>
-</div>
 
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        @Html.ActionLink("Edit", "Edit", new { userName = Model.UserName }, new { @class = "btn btn-default" })
-        <input type="button" value="Return" class="btn btn-default" onclick="location.href = 'javascript:history.back()';" />
-    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            <input type="button" value="Cancel" class="btn btn-default" onclick="location.href = 'javascript:history.back()';" />
+        </div>
+    }
 </div>

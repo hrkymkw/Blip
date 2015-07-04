@@ -1,7 +1,7 @@
-﻿@model Blip.Web.Models.AccountIndexViewModel
-
+﻿@model Blip.Web.Areas.Admin.Models.AdminDetailsViewModel
 @{
-    ViewBag.Title = "Account Profile";
+    ViewBag.Title = "User Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,6 +10,13 @@
 
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.UserName)
@@ -44,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ActiveDate) 
+            @Html.DisplayNameFor(model => model.ActiveDate)
         </dt>
 
         <dd>
@@ -56,6 +63,9 @@
 
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-        @Html.ActionLink("Edit/Change password", "Edit", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Edit", "Edit", new { userName = Model.UserName }, new { @class = "btn btn-default" })
+        <input type="button" value="Return" class="btn btn-default" onclick="location.href = 'javascript:history.back()';" />
     </div>
 </div>
+
+

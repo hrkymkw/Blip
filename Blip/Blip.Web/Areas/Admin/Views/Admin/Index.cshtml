@@ -1,0 +1,69 @@
+﻿@model Blip.Web.Areas.Admin.Models.AdminIndexViewModel
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div id="tabs">
+    <ul>
+        <li><a href=#ActiveUsers>Active Users</a></li>
+        <li><a href=#InactiveUsers>Inactive/Deleted Users</a></li>
+    </ul>
+    @foreach (var i in @Model.ListOfUsers.Select(a => a.Active).ToList<bool>().Distinct())
+    {
+        string tabId = (i == true) ? "ActiveUsers" : "InactiveUsers";
+        <div id=@tabId>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ListOfUsers.FirstOrDefault().UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ListOfUsers.FirstOrDefault().Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ListOfUsers.FirstOrDefault().Role)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ListOfUsers.FirstOrDefault().Active)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in @Model.ListOfUsers.Where(a => a.Active == i))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Active)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { userName = item.UserName }) |
+                            @Html.ActionLink("Details", "Details", new { userName = item.UserName })  
+                            @if (i == true)
+                            {
+                                <text>|</text>
+                                @Html.ActionLink("Delete", "Delete", new { userName = item.UserName })
+                            }                     
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
