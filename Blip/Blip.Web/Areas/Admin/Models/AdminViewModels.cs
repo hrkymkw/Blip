@@ -6,7 +6,14 @@ namespace Blip.Web.Areas.Admin.Models
 {
     public class AdminIndexViewModel
     {
+        public AdminIndexViewModel()
+        {
+            ActiveStatuses = new List<bool>(){ true, false };
+        }
+
         public ICollection<UserIC> ListOfUsers { get; set; }
+
+        public ICollection<bool> ActiveStatuses { get; set; }
 
         public class UserIC
         {

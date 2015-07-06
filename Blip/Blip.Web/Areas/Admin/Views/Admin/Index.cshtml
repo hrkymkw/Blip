@@ -11,7 +11,7 @@
         <li><a href=#ActiveUsers>Active Users</a></li>
         <li><a href=#InactiveUsers>Inactive/Deleted Users</a></li>
     </ul>
-    @foreach (var i in @Model.ListOfUsers.Select(a => a.Active).ToList<bool>().Distinct())
+    @foreach (var i in @Model.ActiveStatuses)
     {
         string tabId = (i == true) ? "ActiveUsers" : "InactiveUsers";
         <div id=@tabId>
