@@ -1,0 +1,34 @@
+2015-07-08 17:24:02,355 [11] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Login 
+2015-07-08 17:24:02,381 [11] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Login - time spent 34 
+2015-07-08 17:24:13,148 [12] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Login 
+2015-07-08 17:24:15,016 [12] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Login - time spent 1868 
+2015-07-08 17:24:15,258 [13] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Home, action Index 
+2015-07-08 17:24:15,475 [13] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Home, action Index - time spent 217 
+2015-07-08 17:24:19,724 [12] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Admin, action Index 
+2015-07-08 17:24:19,739 [12] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Admin, action Index - time spent 14 
+2015-07-08 17:24:24,851 [10] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Admin, action Edit 
+2015-07-08 17:24:24,862 [10] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Admin, action Edit - time spent 10 
+2015-07-08 17:24:30,045 [13] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Index 
+2015-07-08 17:24:30,054 [13] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Index - time spent 8 
+2015-07-08 17:24:32,702 [12] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Edit 
+2015-07-08 17:24:32,709 [12] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Edit - time spent 6 
+2015-07-08 17:24:37,890 [14] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action LogOff 
+2015-07-08 17:24:37,890 [14] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action LogOff - time spent 0 
+2015-07-08 17:24:37,900 [10] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Login 
+2015-07-08 17:24:37,900 [10] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Login - time spent 0 
+2015-07-08 17:28:53,072 [6] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Login 
+2015-07-08 17:28:53,105 [6] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Login - time spent 34 
+2015-07-08 17:29:02,749 [9] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Login 
+2015-07-08 17:29:04,855 [9] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Login - time spent 2105 
+2015-07-08 17:29:05,111 [8] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Home, action Index 
+2015-07-08 17:29:05,374 [8] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Home, action Index - time spent 263 
+2015-07-08 17:29:09,410 [8] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Admin, action Index 
+2015-07-08 17:29:09,424 [8] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Admin, action Index - time spent 14 
+2015-07-08 17:29:17,823 [8] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Index 
+2015-07-08 17:29:17,834 [8] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Index - time spent 10 
+2015-07-08 17:29:20,428 [9] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Edit 
+2015-07-08 17:29:20,435 [9] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Edit - time spent 7 
+2015-07-08 17:29:23,181 [8] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action LogOff 
+2015-07-08 17:29:23,182 [8] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action LogOff - time spent 0 
+2015-07-08 17:29:23,207 [7] DEBUG Blip.Web.Filters.LogFilterAttribute - Executing controller Account, action Login 
+2015-07-08 17:29:23,208 [7] DEBUG Blip.Web.Filters.LogFilterAttribute - Finished executing controller Account, action Login - time spent 0 

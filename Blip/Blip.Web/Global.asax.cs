@@ -14,9 +14,11 @@ namespace Blip.Web
     {
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.Configure();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
 
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
