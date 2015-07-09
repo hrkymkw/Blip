@@ -61,3 +61,4 @@ Temporary Items
 *.mdf
 Blip/Blip.Web/App_Data/BlipDB_log.ldf
 *.bak
+Blip/Blip.Web/Logs/BlipLog.txt

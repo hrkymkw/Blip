@@ -15,6 +15,10 @@ namespace Blip.Web.Controllers
     {
         private BlipContext db = new BlipContext();
 
+        #region Log
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        #endregion
+
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -36,6 +40,8 @@ namespace Blip.Web.Controllers
 
                     if (userValid)
                     {
+                        log.Info("User [" + username + "] logged in successfully");
+
                         FormsAuthentication.SetAuthCookie(username, false);
                         if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
@@ -49,6 +55,7 @@ namespace Blip.Web.Controllers
                     }
                     else
                     {
+                        log.Debug("Login failed: The user name or password provided is incorrect.");
                         ModelState.AddModelError("", "The user name or password provided is incorrect.");
                     }
                 }
@@ -59,6 +66,7 @@ namespace Blip.Web.Controllers
 
         public ActionResult LogOff()
         {
+            log.Info("User [" + User.Identity.Name + "] logged off.");
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
@@ -131,6 +139,7 @@ namespace Blip.Web.Controllers
 
             if (user == null)
             {
+                log.Error("User [" + userName + "] does not exist in the system.");
                 return HttpNotFound();
             }
             return View(user);
@@ -150,6 +159,7 @@ namespace Blip.Web.Controllers
 
             if (user == null)
             {
+                log.Error("User [" + userName + "] does not exist in the system.");
                 return HttpNotFound();
             }
             return View(user);
