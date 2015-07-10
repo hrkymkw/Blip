@@ -21,9 +21,10 @@ namespace Blip.Web.Filters
                 filterContext.HttpContext.Items.Add(StopwatchKey, logWatch);
 
                 var message = new StringBuilder();
-                message.Append(string.Format("Executing {0}/{1}",
+                message.Append(string.Format("Executing {0}/{1} [{2}]",
                     filterContext.ActionDescriptor.ControllerDescriptor.ControllerName,
-                    filterContext.ActionDescriptor.ActionName));
+                    filterContext.ActionDescriptor.ActionName,
+                    filterContext.HttpContext.Request.HttpMethod));
 
                 log.Debug(message);
             }
@@ -41,9 +42,10 @@ namespace Blip.Web.Filters
                     long timeLapse = logWatch.ElapsedMilliseconds;
 
                     var message = new StringBuilder();
-                        message.Append(string.Format("Finished executing {0}/{1} - time spent {2}",
+                        message.Append(string.Format("Finished executing {0}/{1}  [{2}]- time spent {3}",
                             filterContext.ActionDescriptor.ControllerDescriptor.ControllerName,
                             filterContext.ActionDescriptor.ActionName,
+                            filterContext.HttpContext.Request.HttpMethod,
                             timeLapse));
 
                     log.Debug(message);

@@ -35,9 +35,9 @@ namespace Blip.Web.Controllers
             return View(hiVM);
         }
 
-        public ActionResult Message(string sender)
+        public ActionResult Message()
         {
-            sender = (sender == User.Identity.Name) ? sender : User.Identity.Name;
+            string sender = User.Identity.Name;
             HomeMessageViewModel hmVM = new HomeMessageViewModel();
 
             hmVM.Receivers = db.Users
