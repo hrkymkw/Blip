@@ -63,7 +63,7 @@ namespace Blip.Web.Controllers
                 Message message = new Message()
                 {
                     Title = hmVM.Message.Title,
-                    DateTime = DateTime.Today,
+                    DateTime = DateTime.Now,
                     Body = hmVM.Message.Body,
                     Sender = db.Users
                         .Where(u => u.UserName == hmVM.Message.Sender)

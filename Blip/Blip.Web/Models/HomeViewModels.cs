@@ -16,6 +16,7 @@ namespace Blip.Web.Models
             public string Title { get; set; }
 
             [Display(Name = "Date")]
+            [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm:ss ddd}", ApplyFormatInEditMode = true)]
             public DateTime DateTime { get; set; }
 
             public string Body { get; set; }
