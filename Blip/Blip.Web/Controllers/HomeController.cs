@@ -14,12 +14,16 @@ namespace Blip.Web.Controllers
         private BlipContext db = new BlipContext();
 
         //[AllowAnonymous]
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date_asc" : "";
+            ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
+            ViewBag.SenderSortParm = sortOrder == "Sender" ? "sender_desc" : "Sender";
+
             string userName = User.Identity.Name;
             HomeIndexViewModel hiVM = new HomeIndexViewModel();
 
-            hiVM.Messages = db.Messages
+            var hiVMBase = db.Messages
                 .Include(m => m.Receivers)
                 .Select(m => new HomeIndexViewModel.MessageIC
                 {
@@ -29,8 +33,29 @@ namespace Blip.Web.Controllers
                     Body = m.Body,
                     Sender = m.Sender.UserName,
                     Receivers = m.Receivers.Select(r => r.UserName).ToList()
-                }).Where(m => m.Sender == userName || m.Receivers.Contains(userName))
-                .ToList<HomeIndexViewModel.MessageIC>();
+                }).Where(m => m.Sender == userName || m.Receivers.Contains(userName));
+
+            switch (sortOrder)
+            {
+                case "Title":
+                    hiVM.Messages = hiVMBase.OrderBy(m => m.Title).ToList<HomeIndexViewModel.MessageIC>();
+                    break;
+                case "title_desc":
+                    hiVM.Messages = hiVMBase.OrderByDescending(m => m.Title).ToList<HomeIndexViewModel.MessageIC>();
+                    break;
+                case "Sender":
+                    hiVM.Messages = hiVMBase.OrderBy(m => m.Sender).ToList<HomeIndexViewModel.MessageIC>();
+                    break;
+                case "sender_desc":
+                    hiVM.Messages = hiVMBase.OrderByDescending(m => m.Sender).ToList<HomeIndexViewModel.MessageIC>();
+                    break;
+                case "date_asc":
+                    hiVM.Messages = hiVMBase.OrderBy(m => m.DateTime).ToList<HomeIndexViewModel.MessageIC>();
+                    break;
+                default:
+                    hiVM.Messages = hiVMBase.OrderByDescending(m => m.DateTime).ToList<HomeIndexViewModel.MessageIC>();
+                    break;
+            }
 
             return View(hiVM);
         }

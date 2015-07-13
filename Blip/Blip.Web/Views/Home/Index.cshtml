@@ -28,19 +28,19 @@
 </script>
 <table id="messages" class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Title)
+        <th>            
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Title).ToString(), "Index", new { sortOrder = ViewBag.TitleSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Sender)
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Sender).ToString(), "Index", new { sortOrder = ViewBag.SenderSortParm })
         </th>
-        <th>
+        <th>           
             @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Receivers)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().DateTime)
+        <th>          
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().DateTime).ToString(), "Index", new { sortOrder = ViewBag.DateSortParm })
         </th>
-        <th>
+        <th>          
             @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Body)
         </th>
         <th></th>
