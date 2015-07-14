@@ -1,12 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Blip.Web.Models
 {
     public class HomeIndexViewModel
     {
         public ICollection<MessageIC> Messages { get; set; }
+
+        public IEnumerable<string> SearchByEnum { get; set; }
+
+        public ICollection<SelectListItem> SearchBy { get; set; }
+
+        public string CurrentSearchBy { get; set; }
+        public string CurrentSearchString { get; set; }
+        public string DateSortParm { get; set; }
+        public string TitleSortParm { get; set; }
+        public string SenderSortParm { get; set; }
 
         public class MessageIC
         {

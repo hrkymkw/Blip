@@ -26,19 +26,29 @@
         });        
     });
 </script>
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.DropDownList("SearchBy", Model.SearchBy, new { searchBy = Model.SearchBy })
+        @Html.TextBox("SearchString", Model.CurrentSearchString as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table id="messages" class="table">
     <tr>
         <th>            
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Title).ToString(), "Index", new { sortOrder = ViewBag.TitleSortParm })
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Title).ToString(), "Index", new { sortOrder = Model.TitleSortParm, searchBy = Model.CurrentSearchBy, searchString = Model.CurrentSearchString })
         </th>
         <th>
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Sender).ToString(), "Index", new { sortOrder = ViewBag.SenderSortParm })
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Sender).ToString(), "Index", new { sortOrder = Model.SenderSortParm, searchBy = Model.CurrentSearchBy, searchString = Model.CurrentSearchString })
         </th>
         <th>           
             @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Receivers)
         </th>
         <th>          
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().DateTime).ToString(), "Index", new { sortOrder = ViewBag.DateSortParm })
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().DateTime).ToString(), "Index", new { sortOrder = Model.DateSortParm, searchBy = Model.CurrentSearchBy, searchString = Model.CurrentSearchString })
         </th>
         <th>          
             @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Body)
@@ -80,3 +90,4 @@
 <div id="messageDialog" style="display:none">
     <span id="messageBody"></span>
 </div>
+

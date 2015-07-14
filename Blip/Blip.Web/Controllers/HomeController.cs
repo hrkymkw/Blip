@@ -1,6 +1,7 @@
 ﻿using Blip.Web.DAL;
 using Blip.Web.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -14,14 +15,33 @@ namespace Blip.Web.Controllers
         private BlipContext db = new BlipContext();
 
         //[AllowAnonymous]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchBy, string searchString)
         {
-            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date_asc" : "";
-            ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
-            ViewBag.SenderSortParm = sortOrder == "Sender" ? "sender_desc" : "Sender";
-
             string userName = User.Identity.Name;
             HomeIndexViewModel hiVM = new HomeIndexViewModel();
+
+            hiVM.CurrentSearchBy = searchBy;
+            hiVM.CurrentSearchString = searchString;
+            hiVM.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date_asc" : "";
+            hiVM.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
+            hiVM.SenderSortParm = sortOrder == "Sender" ? "sender_desc" : "Sender";
+
+            //hiVM.SearchByEnum = new List<string>() { "Title", "Sender", "Receivers", "Date", "Body" };
+            hiVM.SearchByEnum = new List<string>() { "Title", "Sender", "Receivers", "Body" };
+            hiVM.SearchBy = new List<SelectListItem>();
+
+            hiVM.SearchBy.Add(new SelectListItem { Text = "", Value = "" });
+            foreach (var sbEnum in hiVM.SearchByEnum)
+            {
+                if (sbEnum == searchBy)
+                {
+                    hiVM.SearchBy.Add(new SelectListItem { Text = sbEnum, Value = sbEnum, Selected = true });
+                }
+                else
+                {
+                    hiVM.SearchBy.Add(new SelectListItem { Text = sbEnum, Value = sbEnum });
+                }
+            }
 
             var hiVMBase = db.Messages
                 .Include(m => m.Receivers)
@@ -34,6 +54,33 @@ namespace Blip.Web.Controllers
                     Sender = m.Sender.UserName,
                     Receivers = m.Receivers.Select(r => r.UserName).ToList()
                 }).Where(m => m.Sender == userName || m.Receivers.Contains(userName));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                if (!String.IsNullOrEmpty(searchBy))
+                {
+                    switch (searchBy)
+                    {
+                        case "Title":
+                            hiVMBase = hiVMBase.Where(m => m.Title.Contains(searchString));
+                            break;
+                        case "Sender":
+                            hiVMBase = hiVMBase.Where(m => m.Sender.Contains(searchString));
+                            break;
+                        case "Receivers":
+                            hiVMBase = hiVMBase.Where(m => m.Receivers.Contains(searchString));
+                            break;
+                        //case "Date":
+                        //    hiVMBase = hiVMBase.Where(m => m.DateTime.Equals(searchString));
+                        //    break;
+                        case "Body":
+                            hiVMBase = hiVMBase.Where(m => m.Body.Contains(searchString));
+                            break;
+                        default:
+                            break;
+                    }
+                }              
+            }
 
             switch (sortOrder)
             {
