@@ -4,28 +4,6 @@
     ViewBag.Title = "Home Page";
 }
 <h2>@ViewBag.Title</h2>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var user = '@User.Identity.Name';
-        $('#messages > tbody > tr').each(function () {
-            $(this).find('td').each(function () {
-                $(this).click(function () {
-                    var messageBody = $($(this).parent().children()[4]).html();
-                    $('#messageBody').html(messageBody);
-                    $('#messageDialog').dialog();
-                });                
-                $('.' + user + 'Received').css({
-                    "font-weight": "Bold",
-                    'color' : 'Green'
-                });
-                $('.' + user + 'Sent').css({
-                    "font-weight": "Bold",
-                    'color': 'Red'
-                });
-            });            
-        });        
-    });
-</script>
 
 @using (Html.BeginForm())
 {
@@ -91,3 +69,25 @@
     <span id="messageBody"></span>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var user = '@User.Identity.Name';
+        $('#messages > tbody > tr').each(function () {
+            $(this).find('td').each(function () {
+                $(this).click(function () {
+                    var messageBody = $($(this).parent().children()[4]).html();
+                    $('#messageBody').html(messageBody);
+                    $('#messageDialog').dialog();
+                });
+                $('.' + user + 'Received').css({
+                    "font-weight": "Bold",
+                    'color' : 'Green'
+                });
+                $('.' + user + 'Sent').css({
+                    "font-weight": "Bold",
+                    'color': 'Red'
+                });
+            });
+        });
+    });
+</script>
