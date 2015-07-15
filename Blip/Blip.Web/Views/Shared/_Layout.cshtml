@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Blip!</title>    
-    <link href="@System.Web.Optimization.Styles.Url("~/bundles/maincss")" rel="stylesheet" type="text/css" />    
-    <script src="@System.Web.Optimization.Scripts.Url("~/bundles/mainjs")"></script>    
+    @Styles.Render("~/bundles/maincss")
 </head>
 <body>
 
@@ -21,6 +20,7 @@
     <div id="konamiCheat" style="display: none;">
         <i class="fa fa-key" onclick="alert('Do something here');">Achievement Unlocked - Click Here</i>       
     </div>
+    @Scripts.Render("~/bundles/mainjs")
     @RenderSection("scripts", required: false)
 </body>
 </html>
