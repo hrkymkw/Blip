@@ -17,9 +17,7 @@
             <p>&copy; @DateTime.Now.Year - Blip!</p>
         </footer>
     </div>
-    <div id="konamiCheat" style="display: none;">
-        <i class="fa fa-key" onclick="alert('Do something here');">Achievement Unlocked - Click Here</i>       
-    </div>
+    @Html.Partial("_KonamiCheat")
     @Scripts.Render("~/bundles/mainjs")
     @RenderSection("scripts", required: false)
 </body>
