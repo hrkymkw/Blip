@@ -13,7 +13,6 @@
         @if (Request.IsAuthenticated)
         {
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 @if (User.IsInRole("admin"))
                 {
                     <li>@Html.ActionLink("Admin", "Index", "Admin", new { area = "Admin" }, null)</li>
