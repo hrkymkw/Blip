@@ -5,58 +5,53 @@
 }
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
-{
-    <p>
-        @Html.DropDownList("SearchBy", Model.SearchBy, new { searchBy = Model.SearchBy })
-        @Html.TextBox("SearchString", Model.CurrentSearchString as string)
-        <input type="submit" value="Search" />
-    </p>
-}
-
-<table id="messages" class="table">
-    <tr>
-        <th>            
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Title).ToString(), "Index", new { sortOrder = Model.TitleSortParm, searchBy = Model.CurrentSearchBy, searchString = Model.CurrentSearchString })
-        </th>
-        <th>
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Sender).ToString(), "Index", new { sortOrder = Model.SenderSortParm, searchBy = Model.CurrentSearchBy, searchString = Model.CurrentSearchString })
-        </th>
-        <th>           
-            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Receivers)
-        </th>
-        <th>          
-            @Html.ActionLink(@Html.DisplayNameFor(model => model.Messages.FirstOrDefault().DateTime).ToString(), "Index", new { sortOrder = Model.DateSortParm, searchBy = Model.CurrentSearchBy, searchString = Model.CurrentSearchString })
-        </th>
-        <th>          
-            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Body)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Messages)
-    {
+<table id="messages" class="display">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                <p class='@String.Concat(item.Sender, "Sent")'>@Html.DisplayFor(modelItem => item.Sender)</p>
-            </td>
-            <td>
-                @foreach (var receiver in item.Receivers)
-                {
-                    <p class='@String.Concat(receiver, "Received")'>@Html.DisplayFor(modelItem => receiver)</p>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Sender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Receivers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Body)
+            </th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Messages)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <p class='@String.Concat(item.Sender, "Sent")'>@Html.DisplayFor(modelItem => item.Sender)</p>
+                </td>
+                <td>
+                    @foreach (var receiver in item.Receivers)
+                    {
+                        <p class='@String.Concat(receiver, "Received")'>@Html.DisplayFor(modelItem => receiver)</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+            </tr>
+        }
+    </tbody>
+
 </table>
 
 <div class="form-group">
@@ -69,27 +64,29 @@
     <span id="messageBody"></span>
 </div>
 
+
 @section scripts {
-<script type="text/javascript">
-    $(document).ready(function () {
-        var user = '@User.Identity.Name';
-        $('#messages > tbody > tr').each(function () {
-            $(this).find('td').each(function () {
-                $(this).click(function () {
-                    var messageBody = $($(this).parent().children()[4]).html();
-                    $('#messageBody').html(messageBody);
-                    $('#messageDialog').dialog();
-                });
-                $('.' + user + 'Received').css({
-                    "font-weight": "Bold",
-                    'color' : 'Green'
-                });
-                $('.' + user + 'Sent').css({
-                    "font-weight": "Bold",
-                    'color': 'Red'
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#messages').DataTable();
+            var user = '@User.Identity.Name';
+            $('#messages > tbody > tr').each(function () {
+                $(this).find('td').each(function () {
+                    $(this).click(function () {
+                        var messageBody = $($(this).parent().children()[4]).html();
+                        $('#messageBody').html(messageBody);
+                        $('#messageDialog').dialog();
+                    });
+                    $('.' + user + 'Received').css({
+                        "font-weight": "Bold",
+                        'color' : 'Green'
+                    });
+                    $('.' + user + 'Sent').css({
+                        "font-weight": "Bold",
+                        'color': 'Red'
+                    });
                 });
             });
         });
-    });
-</script>
+    </script>
 }
